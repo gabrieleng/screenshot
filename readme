@@ -1,0 +1,25 @@
+#Usage
+
+Tested in google cloud shell debian.
+
+## Install chromium dependency
+```
+sudo apt update
+sudo apt install chromium
+```
+
+## Get repo
+```
+git clone https://github.com/gabrieleng/screenshot.git
+```
+
+## Navigate to project
+```
+cd screenshot
+```
+
+## Install
+npm install
+
+## Run
+node screenshot.js
