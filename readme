@@ -19,7 +19,12 @@ cd screenshot
 ```
 
 ## Install
+```
 npm install
+```
+
 
 ## Run
+```
 node screenshot.js
+```
