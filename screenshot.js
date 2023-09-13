@@ -51,8 +51,9 @@ function timeout(ms) {
 
         for(let track of shuffled){
             console.log(track);
+            const browser = await puppeteer.launch();
             try{
-                const browser = await puppeteer.launch();
+                
                 const page = await browser.newPage();
                 await page.setViewport({width: 1000, height: 750})
                 await page.goto(track.url, {waitUntil: 'networkidle2'});
@@ -84,6 +85,7 @@ function timeout(ms) {
                 browser.close();
             }catch(err){
                 console.log(err);
+                browser.close();
             }
             
         }   
