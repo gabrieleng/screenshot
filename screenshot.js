@@ -51,36 +51,41 @@ function timeout(ms) {
 
         for(let track of shuffled){
             console.log(track);
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
-            await page.setViewport({width: 1000, height: 750})
-            await page.goto(track.url, {waitUntil: 'networkidle2'});
+            try{
+                const browser = await puppeteer.launch();
+                const page = await browser.newPage();
+                await page.setViewport({width: 1000, height: 750})
+                await page.goto(track.url, {waitUntil: 'networkidle2'});
 
-            if(track.type=="youtube"){
-                await page.waitForSelector('.ytp-play-button.ytp-button');
-                await page.evaluate(() => {
-                    document.querySelector('.ytp-play-button.ytp-button').click();
-                });
-            }
-            if(track.type=="soundcloud"){
-                await page.waitForSelector('.sc-button-play.playButton.sc-button.m-stretch');
-                await page.evaluate(() => {
-                    document.querySelector('.sc-button-play.playButton.sc-button.m-stretch').click();
-                });
-            }
-            if(track.type=="tiktok"){
-                /*
-                await page.waitForSelector('.css-q1bwae-DivPlayIconContainer.e1ya9dnw8');
-                await page.evaluate(() => {
-                    document.querySelector('.css-q1bwae-DivPlayIconContainer.e1ya9dnw8').click();
-                });
-                */
+                if(track.type=="youtube"){
+                    await page.waitForSelector('.ytp-play-button.ytp-button');
+                    await page.evaluate(() => {
+                        document.querySelector('.ytp-play-button.ytp-button').click();
+                    });
+                }
+                if(track.type=="soundcloud"){
+                    await page.waitForSelector('.sc-button-play.playButton.sc-button.m-stretch');
+                    await page.evaluate(() => {
+                        document.querySelector('.sc-button-play.playButton.sc-button.m-stretch').click();
+                    });
+                }
+                if(track.type=="tiktok"){
+                    /*
+                    await page.waitForSelector('.css-q1bwae-DivPlayIconContainer.e1ya9dnw8');
+                    await page.evaluate(() => {
+                        document.querySelector('.css-q1bwae-DivPlayIconContainer.e1ya9dnw8').click();
+                    });
+                    */
+                }
+                
+                let playTime = (track.playTime - (Math.floor(Math.random() * .10*track.playTime)));
+                await timeout(playTime*1000)
+                await page.screenshot({path: `screenshots/${Date.now()}.jpg`});
+                browser.close();
+            }catch(err){
+                console.log(err);
             }
             
-            let playTime = (track.playTime - (Math.floor(Math.random() * .10*track.playTime)));
-            await timeout(playTime*1000)
-            await page.screenshot({path: `screenshots/${Date.now()}.jpg`});
-            browser.close();
         }   
     }
 })();
