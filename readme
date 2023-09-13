@@ -1,4 +1,6 @@
-#Usage
+#Local Setup
+
+
 
 Tested in google cloud shell debian.
 
@@ -27,4 +29,26 @@ npm install
 ## Run
 ```
 node screenshot.js
+```
+
+
+# Google Cloud Setup
+
+
+## Install gcloud CLI
+https://cloud.google.com/sdk/docs/install
+
+## Initialize CLI
+```
+gcloud init
+```
+
+## Initalize App Engine
+```
+gcloud app create
+```
+
+## Deploy
+```
+gcloud app deploy
 ```
